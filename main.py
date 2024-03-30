@@ -45,7 +45,8 @@ while stop_code is False:
                          1. Connect Email
                          2. Balance 
                          3. Withdraw Money
-                         4. Log Out
+                         4. Replenish the card
+                         5. Log Out
                          
                         """)
                     if operation == '1':
@@ -57,6 +58,8 @@ while stop_code is False:
                     elif operation == '3':
                         print(functions.withdraw_money(card_number))
                     elif operation == '4':
+                        print(functions.add_to_user_balance(card_number))
+                    elif operation == '5':
                         log_out = True
 
     elif choice == '3':

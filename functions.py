@@ -154,7 +154,6 @@ def user_balance_change(card_number, amount):
 
 
 def atm_change(atm_remaining: dict):
-    print(atm_remaining)
     query = f"update atm_table set p200 = {atm_remaining['200']},p100 = {atm_remaining['100']},p50 = {atm_remaining['50']},p20 = {atm_remaining['20']},p10 = {atm_remaining['10']},p5 = {atm_remaining['5']} where id = 1"
     DATABASE.connect(query, 'update')
 
@@ -187,14 +186,14 @@ def withdraw_money(card_number: str) -> str:
                 user_balance_change(card_number, remained_balance_user)
                 atm_change(each_dict)
 
-                return 'Get Your Money!!!'
+                return 'Cash dispensed successfully. Thank you for using our ATM.'
 
             else:
                 return 'Operation Failed'
         else:
-            return 'Not Enough ATM Balance'
+            return 'Sorry, we are unable to complete your request at this time. Please try again later.'
     else:
-        return 'Not Enough Money In Your Balance'
+        return 'Transaction could not be completed. Please ensure you have sufficient funds and try again.'
 
 
 def add_user(user1):
@@ -222,3 +221,10 @@ def check_password(valid_password, entered_password):
             if valid_password == entered_password:
                 return True
         return False
+
+def add_to_user_balance(card_number):
+    amount = int(input('Enter The Replenishment Amount: ')) #If entered 50000 then this amount is added to the balance;
+    current_total = return_user_balance(card_number)
+    expected_total = amount + current_total
+    user_balance_change(card_number, expected_total)
+    return f'{amount} dollars is added to your balance.'
